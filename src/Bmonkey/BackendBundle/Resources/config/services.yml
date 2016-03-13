@@ -1,0 +1,4 @@
+services:
+#    bmonkey_backend.example:
+#        class: Bmonkey\BackendBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

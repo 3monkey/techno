@@ -1,0 +1,3 @@
+bmonkey_backend_homepage:
+    path:     /
+    defaults: { _controller: BmonkeyBackendBundle:Default:index }
