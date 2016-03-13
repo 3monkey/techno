@@ -1,3 +1,11 @@
+bmonkey_backend:
+    resource: "@BmonkeyBackendBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bmonkey_frontend:
+    resource: "@BmonkeyFrontendBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
