@@ -1,6 +1,6 @@
 bmonkey_backend:
     resource: "@BmonkeyBackendBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /admin
 
 bmonkey_frontend:
     resource: "@BmonkeyFrontendBundle/Resources/config/routing.yml"

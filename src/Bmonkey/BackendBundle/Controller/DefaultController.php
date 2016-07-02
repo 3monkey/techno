@@ -10,4 +10,10 @@ class DefaultController extends Controller
     {
         return $this->render('BmonkeyBackendBundle:Default:index.html.twig');
     }
+
+    public function dashboardAction(){
+    	return $this->render('BmonkeyBackendBundle:Dashboard:dashboard.html.twig');
+    }
+    
+
 }

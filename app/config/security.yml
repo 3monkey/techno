@@ -1,11 +1,25 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
+    encoders:
+        #Symfony\Component\Security\Core\User\User: plaintext
+        Bmonkey\BackendBundle\Entity\Usuario:
+            algorithm: sha1
+            iterations: 10
+            encode_as_base64: false
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        #ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        #in_memory:
+            #memory: ~
+
+        base_datos:
+            entity: { class:BmonkeyBackendBundle:Usuario, property: username}
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -13,8 +27,41 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            anonymous: ~
+        #login:
+            #pattern: ^/login$
+            #security: false
+
+        #secured_area:
+            #pattern:
+            #form_login:
+                #check_path: _security_check
+                #login_path: _demo_login
+            #logout:
+                #path: _demo_logout
+                #target: _demo
+
+        bmonkey_area_publica:
+            pattern: ^/admin/(dashboard|logout|login$)
+            #anonymous: ~
+            security: false
+
+        bmonkey_area_protegida:
+            pattern: ^/admin
+            provider: base_datos
+            form_login:
+                login_path: /admin/login 
+                check_path: /admin/login_check
+            logout:
+                path: /logout
+                target: /admin
+                invalidate_session: false
+
+    access_control:
+         - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }                                     
+
+        #main:
+            #anonymous: ~
             # activate different ways to authenticate
 
             # http_basic: ~
